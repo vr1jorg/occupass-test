@@ -1,20 +1,19 @@
-import { Suspense, useState } from "react"
-import { dangerouslySetCustomerId } from "../seed"
-import type { CustomerProps } from "../types"
+import type { CustomerDetailsProps } from "../types"
 import SectionHeading from "./section-heading"
-import CustomerOrders from "./customer-orders"
-import { getCustomerOrders } from "../actions"
-import CustomerForm from "./customer-form"
 
-export default function CustomerDetails({ customerId: initialCustomerId = dangerouslySetCustomerId }: CustomerProps) {
-    const [customerId] = useState(initialCustomerId)
+export default function CustomerDetails({ customer }: CustomerDetailsProps) {
     return (
         <section id="customer" className="flex flex-col gap-1">
-            <SectionHeading>Find customer</SectionHeading>
-            <CustomerForm />
-            <Suspense>
-                <CustomerOrders customerOrdersPromise={getCustomerOrders({ customerId: customerId, page: 1 })} />
-            </Suspense>
+            <SectionHeading>Customer Details</SectionHeading>
+            <div className="rounded overflow-hidden">
+                <div className="py-4">
+                    <p className="font-bold text-xl font-roboto">{customer.contactName}</p>
+                    <p className="uppercase mb-1 font-roboto">{customer.companyName}</p>
+                    <p className="text-gray-700 text-base font-roboto">
+                        {customer.address}
+                    </p>
+                </div>
+            </div>
         </section>
     )
 }

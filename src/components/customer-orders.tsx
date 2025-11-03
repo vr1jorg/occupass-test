@@ -1,11 +1,10 @@
-import { use, useState } from "react"
+import {  useState } from "react"
 import type { CustomerOrdersProps } from "../types"
 import SectionHeading from "./section-heading"
 import CustomerOrderView from "./customer-order-view"
 import Pagination from "./pagination"
 
-export default function CustomerOrders({ customerOrdersPromise }: CustomerOrdersProps) {
-    const customerOrders = use(customerOrdersPromise)
+export default function CustomerOrders({ customerOrders }: CustomerOrdersProps) {
     const [currentPage, setCurrentPage] = useState(1);
     return (
         <section id="orders">

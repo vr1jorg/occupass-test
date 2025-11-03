@@ -3,7 +3,7 @@ import type React from "react"
 import type { Control, UseFormRegister } from "react-hook-form"
 import type { CustomerFormData } from "./schemas"
 
-type Customer = {
+export type Customer = {
     id: string,
     companyName: string,
     contactName: string,
@@ -18,15 +18,22 @@ type Customer = {
 }
 
 export interface CustomersProps {
-    customersPromise: Promise<Customer[]>
+    customers: Customer[]
 }
 
 export interface CustomerViewProps {
-    customer: Customer
+    customer: Customer,
+    onClose: () => void
 }
 
-export interface CustomerProps {
-    customerId: string
+export interface CustomerCardProps {
+    onSelect: () => void
+    customer: Customer,
+    isSelected: boolean
+}
+
+export interface CustomerDetailsProps {
+    customer: Customer
 }
 
 type Order = {
@@ -109,7 +116,7 @@ export type CustomerOrderDetail = {
 }
 
 export interface CustomerOrdersProps {
-    customerOrdersPromise: Promise<CustomerOrder[]>
+    customerOrders: CustomerOrder[]
 }
 
 export type CustomerOrder = {
@@ -134,12 +141,13 @@ export interface LabelProps {
 
 export enum Path {
     CustomersEndpoint = `/GetAllCustomers`,
-    OrdersEndpoint = `/GetOrders?page=1&customerId=ALFKI`,
+    OrdersEndpoint = `/GetOrders`,
+    CustomerDetailsEndpoint = `/GetCustomerDetails`,
     ApiBaseUrl = `'https://uitestapi.occupass.com'`
 }
 
 export interface GetCustomerDetailsArgs {
-    id: string
+    customerId: string
 }
 
 export interface GetOrdersArgs {
@@ -214,4 +222,23 @@ export interface SelectFieldProps {
     placeholder: string,
     label: string
     register: UseFormRegister<CustomerFormData>;
+}
+
+export interface LayoutProps {
+    children: ReactNode
+}
+
+export interface CustomersProviderProps {
+    children: ReactNode
+}
+
+export interface CustomersListProps {
+    customers: Customer[]
+}
+
+export type CustomersContextType  ={
+  customers: Customer[];
+  selectedCustomer: Customer | null;
+  selectCustomer: (customer: Customer) => void;
+  isPending: boolean;
 }

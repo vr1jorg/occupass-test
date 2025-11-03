@@ -1,17 +1,17 @@
+import { Suspense } from "react";
 import type { CustomerViewProps } from "../types";
+import CustomerOrders from "./customer-orders";
+import { getCustomerOrders } from "../actions";
+import CustomerDetails from "./customer-details";
 
-export default function CustomerView({ customer }: CustomerViewProps) {
+export default async function CustomerView({ customer, onClose }: CustomerViewProps) {
+    const customerOrders = await getCustomerOrders({ customerId: customer.id, page: 1 })
     return (
         <div>
-            <div className="rounded overflow-hidden">
-                <div className="py-4">
-                    <p className="font-bold text-xl font-roboto">{customer.contactName}</p>
-                    <p className="uppercase mb-1 font-roboto">{customer.companyName}</p>
-                    <p className="text-gray-700 text-base font-roboto">
-                        {customer.address}
-                    </p>
-                </div>
-            </div>
+            <CustomerDetails customer={customer} />
+            <Suspense>
+                <CustomerOrders customerOrders={customerOrders} />
+            </Suspense>
         </div>
     )
 }
