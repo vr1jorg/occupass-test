@@ -3,11 +3,13 @@ import type { LinkProps } from "../types"
 
 export default function Menu() {
     return (
-        <ul className="flex gap-4">
-            {menuLinks.map(link => (
-                <Link key={link.href} href={link.href}>{link.text}</Link>
-            ))}
-        </ul>
+        <aside>
+            <nav className="flex gap-4">
+                {menuLinks.map(link => (
+                    <Link key={link.href} href={link.href}>{link.text}</Link>
+                ))}
+            </nav>
+        </aside>
     )
 }
 

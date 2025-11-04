@@ -15,7 +15,7 @@ export async function getCustomerOrders({ customerId, page }: GetCustomerOrdersA
     return data.results
 }
 
-export async function getCustomer({ customerId }: GetCustomerDetailsArgs) {
+export async function getCustomerDetails({ customerId }: GetCustomerDetailsArgs) {
     const response = await fetch(`https://uitestapi.occupass.com/api/GetCustomerDetails?customerId=${customerId}`);
     console.log(response)
     const data = await response.json();

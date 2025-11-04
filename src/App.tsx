@@ -1,23 +1,12 @@
-import { Suspense, useEffect, useState } from "react"
-import { getCustomers } from "./actions"
 import Customers from "./components/customers"
-import Header from "./components/header"
-import type { LayoutProps } from "./types"
-import { startTransition } from "react";
-
+import Layout from "./components/layout"
 
 function App() {
- 
   return (
     <Layout>
-      <Suspense>
-        <Customers customers={customers} />
-      </Suspense>
+      <Customers />
     </Layout>
   )
 }
-
-
-
 
 export default App

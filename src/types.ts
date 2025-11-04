@@ -21,15 +21,8 @@ export interface CustomersProps {
     customers: Customer[]
 }
 
-export interface CustomerViewProps {
-    customer: Customer,
-    onClose: () => void
-}
-
 export interface CustomerCardProps {
-    onSelect: () => void
     customer: Customer,
-    isSelected: boolean
 }
 
 export interface CustomerDetailsProps {
@@ -124,7 +117,7 @@ export type CustomerOrder = {
     orderDetails: CustomerOrderDetail[]
 }
 
-export interface CustomerOrderViewProps {
+export interface CustomerOrderInformationProps {
     customerOrder: CustomerOrder
 }
 
@@ -143,7 +136,7 @@ export enum Path {
     CustomersEndpoint = `/GetAllCustomers`,
     OrdersEndpoint = `/GetOrders`,
     CustomerDetailsEndpoint = `/GetCustomerDetails`,
-    ApiBaseUrl = `'https://uitestapi.occupass.com'`
+    ApiBaseUrl = `https://uitestapi.occupass.com`
 }
 
 export interface GetCustomerDetailsArgs {
@@ -236,9 +229,27 @@ export interface CustomersListProps {
     customers: Customer[]
 }
 
-export type CustomersContextType  ={
-  customers: Customer[];
-  selectedCustomer: Customer | null;
-  selectCustomer: (customer: Customer) => void;
-  isPending: boolean;
+export type CustomersContextType = {
+    customers: Customer[];
+    selectedCustomerDetails: CustomerDetails | null;
+    selectedCustomerId: string | null;
+    selectCustomer: (customerId: string) => void;
+    isPending: boolean;
+}
+
+export type CustomerDetails = {
+    customer: Customer,
+    orders: CustomerOrder[]
+}
+
+export interface CustomerInformationProps {
+    customer: Customer
+}
+
+export interface ExpandedCustomerProps {
+    customer: Customer
+}
+
+export interface CustomerOrdersProps {
+    
 }

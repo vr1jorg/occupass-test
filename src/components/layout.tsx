@@ -6,7 +6,7 @@ export default function Layout({ children }: LayoutProps) {
     return (
         <CustomersProvider>
             <Header />
-            <main className="grid grid-cols-2 gap-4">
+            <main>
                 {children}
             </main>
         </CustomersProvider>

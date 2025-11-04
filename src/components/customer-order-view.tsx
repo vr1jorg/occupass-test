@@ -1,6 +1,6 @@
-import type { CustomerOrderViewProps } from "../types";
+import type { CustomerOrderInformationProps } from "../types";
 
-export default function CustomerOrderView({ customerOrder }: CustomerOrderViewProps) {
+export default function CustomerOrderInformation({ customerOrder }: CustomerOrderInformationProps) {
     return (
         <div>
             {customerOrder.orderDetails.map(detail => (

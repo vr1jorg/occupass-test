@@ -5,32 +5,46 @@ import {
   useState,
   useTransition
 } from 'react';
-import type { Customer, CustomersContextType, CustomersProviderProps } from '../types';
-import { getCustomers } from '../actions';
+import type { CustomerDetails, CustomersContextType, CustomersProviderProps } from '../types';
+import { getCustomerDetails, getCustomers } from '../actions';
 
 export const CustomersContext = createContext<CustomersContextType | null>(null);
 
 export default function CustomersProvider({ children }: CustomersProviderProps) {
-  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
+  const [selectedCustomerId, setSelectedCustomerId] = useState<string | null>(null)
+  const [selectedCustomerDetails, setSelectedCustomerDetails] = useState<CustomerDetails | null>(null);
   const [customers, setCustomers] = useState([]);
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     startTransition(async () => {
-      const data = await getCustomers();
-      setCustomers(data);
+      const customers = await getCustomers();
+      setCustomers(customers);
     });
   }, []);
 
-  const selectCustomer = (customer: Customer) => {
+  useEffect(() => {
+    if (selectedCustomerId) {
+      startTransition(async () => {
+        const customerDetails = await getCustomerDetails({ customerId: selectedCustomerId });
+        setSelectedCustomerDetails(customerDetails);
+      });
+    }
+  }, [selectedCustomerId])
+
+  const selectCustomer = (customerId: string) => {
     startTransition(() => {
-      setSelectedCustomer(customer);
+      setSelectedCustomerId(customerId);
     });
   };
 
+
+
+
+
   return (
     <CustomersContext.Provider
-      value={{ customers, selectedCustomer, selectCustomer, isPending }}
+      value={{ customers, selectedCustomerDetails, selectCustomer, isPending, selectedCustomerId }}
     >
       {children}
     </CustomersContext.Provider>
