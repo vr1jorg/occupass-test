@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { customerFormSchema, type CustomerFormData } from "../schemas";
 import { useForm } from "react-hook-form";
-import { submitForm } from "../actions";
 import Field from "./field";
 
 export default function CustomerForm() {
@@ -13,10 +12,10 @@ export default function CustomerForm() {
     } = useForm<CustomerFormData>({
         resolver: zodResolver(customerFormSchema),
         mode: "onChange"
-    });7
+    }); 7
 
     async function onSubmit(data: CustomerFormData) {
-        submitForm(data)
+        console.log(data)
         reset()
     }
 
