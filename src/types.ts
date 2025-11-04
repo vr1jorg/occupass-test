@@ -133,9 +133,8 @@ export interface LabelProps {
 }
 
 export enum Path {
-    CustomersEndpoint = `/GetAllCustomers`,
-    OrdersEndpoint = `/GetOrders`,
-    CustomerDetailsEndpoint = `/GetCustomerDetails`,
+    CustomersEndpoint = `/api/CachedGetAllCustomers`,
+    CustomerDetailsEndpoint = `/api/CachedGetCustomerDetails`,
     ApiBaseUrl = `https://uitestapi.occupass.com`
 }
 
@@ -231,10 +230,6 @@ export interface CustomersListProps {
 
 export type CustomersContextType = {
     customers: Customer[];
-    selectedCustomerDetails: CustomerDetails | null;
-    selectedCustomerId: string | null;
-    selectCustomer: (customerId: string) => void;
-    isPending: boolean;
 }
 
 export type CustomerDetails = {
@@ -251,5 +246,5 @@ export interface ExpandedCustomerProps {
 }
 
 export interface CustomerOrdersProps {
-    
+
 }

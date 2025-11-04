@@ -1,15 +1,11 @@
 import DataTable from "react-data-table-component";
-import { useCustomers } from "../contexts/customers-context";
-import Loading from "./loading";
+import { useCustomers, useSelectedCustomer } from "../contexts/customers-context";
 import { customersTableColumns } from "../constants";
 import type { Customer } from "../types";
 
 export default function CustomersTable() {
-    const { customers, isPending } = useCustomers()
-
-    if (isPending) {
-        return <Loading />
-    }
+    const { customers } = useCustomers()
+    const { selectCustomer } = useSelectedCustomer()
 
     if (!customers) {
         return null
@@ -17,6 +13,7 @@ export default function CustomersTable() {
 
     function handleRowClick(row: Customer) {
         console.log(row)
+        selectCustomer(row.id)
     }
 
     const columns = customersTableColumns

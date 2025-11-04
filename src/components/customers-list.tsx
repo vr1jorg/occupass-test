@@ -2,9 +2,8 @@ import CustomerCard from "./costumer-card";
 import { useCustomers } from "../contexts/customers-context";
 
 export default function CustomersList() {
-  const { customers, isPending } = useCustomers();
+  const { customers } = useCustomers();
 
-  if (isPending) return <p>Loading...</p>;
   return (
     <ul className="grid grid-cols-3 mt-2">
       {customers.map(customer => (

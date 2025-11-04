@@ -1,8 +1,8 @@
-import { useCustomers } from "../contexts/customers-context";
+import { useSelectedCustomer } from "../contexts/customers-context";
 import type { CustomerCardProps } from "../types";
 
 export default function CustomerCard({ customer }: CustomerCardProps) {
-    const { selectedCustomerId, selectCustomer } = useCustomers()
+    const { selectedCustomerId, selectCustomer } = useSelectedCustomer()
     const isSelected = selectedCustomerId && selectedCustomerId === customer.id
 
     function handleSelectCustomer() {

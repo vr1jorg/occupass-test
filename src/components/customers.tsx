@@ -7,7 +7,7 @@ export default function Customers() {
     <section>
       <SectionHeading>Customers</SectionHeading>
       <CustomersTable />
-      <CustomerModal /> 
+      <CustomerModal />
     </section>
   )
 }
